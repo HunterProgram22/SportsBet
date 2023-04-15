@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Odds</title>
+</head>
+<body>
+<h1>Odds</h1>
+{% for event in odds %}
+<h2>{{ event.home_team }} vs. {{ event.away_team }}</h2>
+{% for bookmaker in event.bookmakers %}
+<h3>{{ bookmaker.title }}</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Market</th>
+        <th>Outcome</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for market in bookmaker.markets %}
+    {% for outcome in market.outcomes %}
+    <tr>
+        <td>{{ market.key }}</td>
+        <td>{{ outcome.name }}</td>
+        <td>{{ outcome.price }}</td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+{% endfor %}
+</body>
+</html>
