@@ -7,6 +7,7 @@ REGIONS = 'us' # uk | us | eu | au. Multiple can be specified if comma delimited
 MARKETS = 'h2h,spreads' # h2h | spreads | totals. Multiple can be specified if comma delimited
 ODDS_FORMAT = 'american' # decimal | american
 DATE_FORMAT = 'iso' # iso | unix
+BOOKMAKERS = 'betmgm, draftkings,'
 
 
 def get_sports():
@@ -28,6 +29,7 @@ def get_odds(sport):
         'markets': MARKETS,
         'oddsFormat': ODDS_FORMAT,
         'dateFormat': DATE_FORMAT,
+        'bookmakers': BOOKMAKERS,
     })
 
     if odds_response.status_code != 200:
