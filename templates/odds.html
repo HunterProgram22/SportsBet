@@ -5,6 +5,16 @@
 </head>
 <body>
 <h1>Odds</h1>
+<form method="POST" action="{{ url_for('odds') }}">
+    <label for="sport-select">Select a sport:</label>
+    <select name="sport" id="sport-select">
+        <option value="americanfootball_nfl">NFL</option>
+        <option value="basketball_nba">NBA</option>
+        <option value="baseball_mlb">MLB</option>
+    </select>
+    <button type="submit">Load Odds</button>
+</form>
+{% if odds %}
 {% for event in odds %}
 <h2>{{ event.home_team }} vs. {{ event.away_team }}</h2>
 {% for bookmaker in event.bookmakers %}
@@ -31,5 +41,6 @@
 </table>
 {% endfor %}
 {% endfor %}
+{% endif %}
 </body>
 </html>

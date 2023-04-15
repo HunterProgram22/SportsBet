@@ -1,34 +1,13 @@
-import argparse
-
 import requests
 
 
-# Obtain the api key that was passed in from the command line
-parser = argparse.ArgumentParser(description='Sample V4')
-parser.add_argument('--api-key', type=str, default='')
-args = parser.parse_args()
-
-
-# An api key is emailed to you when you sign up to a plan
-# Get a free API key at https://api.the-odds-api.com/
-API_KEY = args.api_key or '3da52cba941b4fc38173d5e81efc2627'
-
+API_KEY = '3da52cba941b4fc38173d5e81efc2627'
 SPORT = 'upcoming' # use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
-
 REGIONS = 'us' # uk | us | eu | au. Multiple can be specified if comma delimited
-
 MARKETS = 'h2h,spreads' # h2h | spreads | totals. Multiple can be specified if comma delimited
-
 ODDS_FORMAT = 'american' # decimal | american
-
 DATE_FORMAT = 'iso' # iso | unix
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#
-# First get a list of in-season sports
-#   The sport 'key' from the response can be used to get odds in the next request
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 def get_sports():
     sports_response = requests.get('https://api.the-odds-api.com/v4/sports', params={
@@ -42,17 +21,7 @@ def get_sports():
         print('List of in season sports:', sports_response.json())
 
 
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#
-# Now get a list of live & upcoming games for the sport you want, along with odds for different bookmakers
-# This will deduct from the usage quota
-# The usage quota cost = [number of markets specified] x [number of regions specified]
-# For examples of usage quota costs, see https://the-odds-api.com/liveapi/guides/v4/#usage-quota-costs
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-def get_odds(sport='baseball_mlb'):
+def get_odds(sport):
     odds_response = requests.get(f'https://api.the-odds-api.com/v4/sports/{sport}/odds', params={
         'api_key': API_KEY,
         'regions': REGIONS,
